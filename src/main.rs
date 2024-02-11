@@ -1,6 +1,9 @@
 use {
     anyhow::{anyhow, Result},
     clap::Parser,
+    lazy_static::lazy_static,
+    serde::Deserialize,
+    std::collections::HashMap,
     std::{fmt::Debug, fs::read_dir, path::Path, process::Command},
 };
 
@@ -28,6 +31,13 @@ fn visit_dirs(dir: &Path) -> Result<()> {
     }
 }
 
+#[derive(Deserialize, Debug, Clone)]
+struct Language {
+    name: String,
+    r#type: String,
+    extensions: Vec<String>,
+}
+
 fn parse_repo(dir: &Path) -> Result<()> {
     println!("{:?}", dir.as_os_str());
     let ls_files_output = if cfg!(target_os = "windows") {
@@ -52,23 +62,39 @@ fn parse_repo(dir: &Path) -> Result<()> {
     splitted.pop();
     println!("{:?}", splitted);
 
-    splitted.iter().map(|path| {
-        
-        let output = if cfg!(target_os = "windows") {
-        Command::new("cmd")
-            .args(["/C", "echo hello"])
-            .output()
-            .expect("failed to execute process")
-        } else {
-        Command::new("sh")
-            .arg("-c")
-            .arg("echo hello")
-            .output()
-            .expect("failed to execute process")
-        };
-            })
+    // splitted.iter().map(|path| {
+
+    //     let output = if cfg!(target_os = "windows") {
+    //     Command::new("cmd")
+    //         .args(["/C", "echo hello"])
+    //         .output()
+    //         .expect("failed to execute process")
+    //     } else {
+    //     Command::new("sh")
+    //         .arg("-c")
+    //         .arg("echo hello")
+    //         .output()
+    //         .expect("failed to execute process")
+    //     };
+    //         })
 
     Ok(())
+}
+
+lazy_static! {
+    static ref LANGUAGES: HashMap<String, Language> = {
+        let languages_asset = include_str!(
+            "../43962d06686722d26d176fad46879d41/Programming_Languages_Extensions.json"
+        );
+        let languages_vec: Vec<Language> = serde_json::from_str(languages_asset).unwrap();
+        let mut languages_map = HashMap::new();
+        for lang in languages_vec {
+            for ext in lang.extensions.clone() {
+                languages_map.insert(ext, lang.clone());
+            }
+        }
+        languages_map
+    };
 }
 
 #[derive(Parser, Debug)]
@@ -90,6 +116,7 @@ fn main() -> Result<()> {
     } else {
         std::env::current_dir()?
     };
+
     visit_dirs(path.as_path())?;
     Ok(())
 }

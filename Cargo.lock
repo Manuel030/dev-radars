@@ -168,6 +168,9 @@ dependencies = [
  "charming",
  "clap",
  "indicatif",
+ "lazy_static",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]

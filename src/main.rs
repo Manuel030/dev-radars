@@ -7,8 +7,13 @@ use {
     std::{fmt::Debug, fs::read_dir, path::Path, process::Command},
 };
 
-fn visit_dirs(dir: &Path) -> Result<()> {
+fn visit_dirs(
+    dir: &Path,
+    username: &str,
+    accumulator: Option<HashMap<String, usize>>,
+) -> Result<Option<HashMap<String, usize>>> {
     if dir.is_dir() {
+        let mut inner_accumulator = None;
         for entry in read_dir(dir)? {
             let entry = entry?;
             let path = entry.path();
@@ -20,25 +25,41 @@ fn visit_dirs(dir: &Path) -> Result<()> {
                     .ok_or(anyhow!("directory name is not valid unicode"))?
                     == ".git"
                 {
-                    parse_repo(path.parent().ok_or(anyhow!("no parent folder"))?)?
+                    let res =
+                        parse_repo(path.parent().ok_or(anyhow!("no parent folder"))?, username)?;
+                    inner_accumulator = combine_loc_by_lang(Some(res), inner_accumulator)
+                } else {
+                    inner_accumulator = visit_dirs(&path, username, inner_accumulator.clone())?;
                 }
-                visit_dirs(&path)?;
-            }
+            };
         }
-        Ok(())
+        Ok(combine_loc_by_lang(accumulator, inner_accumulator))
     } else {
         Err(anyhow!("input is not a directory"))
     }
 }
 
-#[derive(Deserialize, Debug, Clone)]
-struct Language {
-    name: String,
-    r#type: String,
-    extensions: Vec<String>,
+fn combine_loc_by_lang(
+    accumulator: Option<HashMap<String, usize>>,
+    other_accumulator: Option<HashMap<String, usize>>,
+) -> Option<HashMap<String, usize>> {
+    match (accumulator, other_accumulator) {
+        (Some(mut loc_by_lang), Some(loc_by_lang_inner)) => {
+            for (lang, loc) in loc_by_lang_inner.iter() {
+                loc_by_lang
+                    .entry(lang.clone())
+                    .and_modify(|count| *count += loc)
+                    .or_insert(*loc);
+            }
+            Some(loc_by_lang)
+        }
+        (Some(loc_by_lang), None) => Some(loc_by_lang),
+        (None, Some(loc_by_lang_inner)) => Some(loc_by_lang_inner),
+        (None, None) => None,
+    }
 }
 
-fn parse_repo(dir: &Path) -> Result<()> {
+fn parse_repo(dir: &Path, username: &str) -> Result<HashMap<String, usize>> {
     println!("{:?}", dir.as_os_str());
     let ls_files_output = if cfg!(target_os = "windows") {
         Command::new("cmd")
@@ -60,28 +81,68 @@ fn parse_repo(dir: &Path) -> Result<()> {
     let mut splitted: Vec<&str> = git_files.split("\n").collect();
     // the last element is always an empty line
     splitted.pop();
-    println!("{:?}", splitted);
+    // println!("{:?}", splitted);
 
-    // splitted.iter().map(|path| {
+    let loc_by_lang = splitted.iter().try_fold(
+        HashMap::new(),
+        |mut acc, path| -> Result<HashMap<String, usize>> {
+            let blame_output = if cfg!(target_os = "windows") {
+                Command::new("cmd")
+                    .args([
+                        "/C",
+                        &format!(
+                            "cd {} && git blame --line-porcelain {path}",
+                            dir.to_str().unwrap()
+                        ),
+                    ])
+                    .output()
+                    .expect("failed to execute process")
+            } else {
+                Command::new("sh")
+                    .arg("-c")
+                    .arg(format!(
+                        "cd {} && git blame --line-porcelain {path}",
+                        dir.to_str().unwrap()
+                    ))
+                    .output()
+                    .expect("failed to execute process")
+            };
+            let Ok(blame) = String::from_utf8(blame_output.stdout) else {
+                return Ok(acc);
+            };
+            let count = blame.matches(&format!("author {username}")).count();
 
-    //     let output = if cfg!(target_os = "windows") {
-    //     Command::new("cmd")
-    //         .args(["/C", "echo hello"])
-    //         .output()
-    //         .expect("failed to execute process")
-    //     } else {
-    //     Command::new("sh")
-    //         .arg("-c")
-    //         .arg("echo hello")
-    //         .output()
-    //         .expect("failed to execute process")
-    //     };
-    //         })
+            if let Some(extension) = Path::new(path).extension() {
+                let extension_with_dot = String::from(".")
+                    + extension
+                        .to_str()
+                        .ok_or(anyhow!("found None in Os string"))?;
 
-    Ok(())
+                if let Some(lang) = LANGUAGES.get(&extension_with_dot) {
+                    acc.entry(lang.name.clone())
+                        .and_modify(|lang_count| *lang_count += count)
+                        .or_insert(count);
+                }
+                Ok(acc)
+            } else {
+                Ok(acc)
+            }
+        },
+    )?;
+    println!("We have {:?} loc in {}", loc_by_lang, dir.display());
+
+    Ok(loc_by_lang)
+}
+
+#[derive(Deserialize, Debug, Clone)]
+struct Language {
+    name: String,
+    r#type: String,
+    extensions: Vec<String>,
 }
 
 lazy_static! {
+    // File extension is the key
     static ref LANGUAGES: HashMap<String, Language> = {
         let languages_asset = include_str!(
             "../43962d06686722d26d176fad46879d41/Programming_Languages_Extensions.json"
@@ -107,6 +168,10 @@ struct Args {
     /// Depth  of child directories to traverse
     #[arg(short, long)]
     depth: Option<u8>,
+
+    // Git username. If none provided, the global git username will be used
+    #[arg(short, long)]
+    username: Option<String>,
 }
 
 fn main() -> Result<()> {
@@ -116,7 +181,24 @@ fn main() -> Result<()> {
     } else {
         std::env::current_dir()?
     };
+    let username = args.username.unwrap_or_else(|| {
+        let username_output = if cfg!(target_os = "windows") {
+            Command::new("cmd")
+                .args(["/C", "git config --global user.name"])
+                .output()
+                .expect("failed to execute process")
+        } else {
+            Command::new("sh")
+                .arg("-c")
+                .arg("git config --global user.name")
+                .output()
+                .expect("failed to execute process")
+        };
+        let username = String::from_utf8(username_output.stdout).unwrap();
+        username.trim().to_owned()
+    });
 
-    visit_dirs(path.as_path())?;
+    let res = visit_dirs(path.as_path(), &username, None)?;
+    println!("{:?}", res);
     Ok(())
 }

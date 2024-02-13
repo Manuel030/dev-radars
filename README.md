@@ -1,6 +1,12 @@
 # dev-radars
 Render a radar plot of your tech stack. `dev-radars` parses git objects to compute statistics per technology.
 
+`dev-radars` is something between running [Aloc](https://github.com/AlDanial/cloc/tree/master) in a Docker container and executing random commands from the internet:
+
+```
+git ls-files | xargs -n1 git blame --line-porcelain | sed -n 's/^author //p' | sort -f | uniq -ic | sort -nr
+```
+
 ## Installation
 
 Using cargo:

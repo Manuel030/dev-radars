@@ -60,7 +60,7 @@ fn combine_loc_by_lang(
 }
 
 fn parse_repo(dir: &Path, username: &str) -> Result<HashMap<String, usize>> {
-    println!("{:?}", dir.as_os_str());
+    println!("Parsing {:?}", dir.as_os_str());
     let ls_files_output = if cfg!(target_os = "windows") {
         Command::new("cmd")
             .args([
@@ -171,7 +171,7 @@ struct Args {
 
     // Git username. If none provided, the global git username will be used
     #[arg(short, long)]
-    username: Option<String>,
+    author: Option<String>,
 }
 
 fn main() -> Result<()> {
@@ -181,7 +181,7 @@ fn main() -> Result<()> {
     } else {
         std::env::current_dir()?
     };
-    let username = args.username.unwrap_or_else(|| {
+    let username = args.author.unwrap_or_else(|| {
         let username_output = if cfg!(target_os = "windows") {
             Command::new("cmd")
                 .args(["/C", "git config --global user.name"])

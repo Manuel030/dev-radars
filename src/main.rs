@@ -1,5 +1,10 @@
 use {
     anyhow::{anyhow, Result},
+    charming::{
+        component::{RadarCoordinate, Title},
+        series::Radar,
+        Chart, ImageRenderer,
+    },
     clap::Parser,
     lazy_static::lazy_static,
     serde::Deserialize,
@@ -134,6 +139,23 @@ fn parse_repo(dir: &Path, username: &str) -> Result<HashMap<String, usize>> {
     Ok(loc_by_lang)
 }
 
+fn chart(data: &HashMap<String, usize>, username: &str) -> Result<Chart> {
+    let max_loc = data
+        .values()
+        .max()
+        .ok_or(anyhow!("no data to render"))?
+        .to_owned() as i64;
+    let radar_triplets: Vec<(&str, i64, i64)> = data
+        .iter()
+        .map(|(lang, _)| (lang.as_str(), 0, max_loc))
+        .collect();
+    let locs: Vec<i64> = data.iter().map(|(_, loc)| loc.to_owned() as i64).collect();
+    Ok(Chart::new()
+        .title(Title::new().text(format!("{username}'s tech stack")))
+        .radar(RadarCoordinate::new().indicator(radar_triplets))
+        .series(Radar::new().name("LOC").data(vec![(locs, "Foo")])))
+}
+
 #[derive(Deserialize, Debug, Clone)]
 struct Language {
     name: String,
@@ -165,6 +187,7 @@ struct Args {
     #[arg(short, long)]
     path: Option<String>,
 
+    // TODO: add functionality
     /// Depth  of child directories to traverse
     #[arg(short, long)]
     depth: Option<u8>,
@@ -200,5 +223,11 @@ fn main() -> Result<()> {
 
     let res = visit_dirs(path.as_path(), &username, None)?;
     println!("{:?}", res);
+
+    if let Some(data) = res {
+        let radar = chart(&data, &username)?;
+        let mut renderer = ImageRenderer::new(1000, 800);
+        renderer.save(&radar, "radar.svg");
+    }
     Ok(())
 }

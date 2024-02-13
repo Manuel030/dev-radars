@@ -32,4 +32,6 @@ Options:
 - [ ] Flag to add an ignore list of directory names
 - [ ] Parallel processing
 - [ ] Installation with Nix
+- [ ] Support multiple user names (local and global)
+- [ ] Add progress bar
 

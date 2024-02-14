@@ -28,10 +28,24 @@ Options:
   -V, --version          Print version
 ```
 
+## Examples
+
+Parse a directory only up to a depth of 2
+
+```
+dev-radars -p /home/manuel/projects -d 2
+```
+
+When collecting the LOC, search for both author names `foo` and `bar`
+
+```
+dev-radars -p /home/manuel/projects  -a "foo" "bar"
+```
+
 ## Todos
 - [ ] Flag to add an ignore list of directory names
 - [ ] Parallel processing
 - [ ] Installation with Nix
-- [ ] Support multiple user names (local and global)
+- [X] Support multiple user names (local and global)
 - [ ] Add progress bar
 

@@ -1,42 +1,49 @@
 <svg width="1000" height="800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 1000 800">
 <rect width="1000" height="800" x="0" y="0" id="0" fill="none"></rect>
-<path d="M500 340L467.6 349.5L445.4 375.1L440.6 408.5L454.7 439.3L483.1 457.6L516.9 457.6L545.3 439.3L559.4 408.5L554.6 375.1L532.4 349.5L500 340L500 400ZM500 220L402.7 248.6L336.3 325.2L321.8 425.6L364 517.9L449.3 572.7L550.7 572.7L636 517.9L678.2 425.6L663.7 325.2L597.3 248.6L500 220L500 280L564.9 299L609.2 350.2L618.8 417.1L590.7 478.6L533.8 515.1L466.2 515.1L409.3 478.6L381.2 417.1L390.8 350.2L435.1 299L500 280ZM500 100L337.8 147.6L227.1 275.4L203.1 442.7L273.3 596.5L415.5 687.8L584.5 687.8L726.7 596.5L796.9 442.7L772.9 275.4L662.2 147.6L500 100L500 160L629.8 198.1L718.3 300.3L737.6 434.2L681.4 557.2L567.6 630.3L432.4 630.3L318.6 557.2L262.4 434.2L281.7 300.3L370.2 198.1L500 160Z" fill="rgb(250,250,250)" fill-opacity="0.2"></path>
-<path d="M500 280L435.1 299L390.8 350.2L381.2 417.1L409.3 478.6L466.2 515.1L533.8 515.1L590.7 478.6L618.8 417.1L609.2 350.2L564.9 299L500 280L500 340L532.4 349.5L554.6 375.1L559.4 408.5L545.3 439.3L516.9 457.6L483.1 457.6L454.7 439.3L440.6 408.5L445.4 375.1L467.6 349.5L500 340ZM500 160L370.2 198.1L281.7 300.3L262.4 434.2L318.6 557.2L432.4 630.3L567.6 630.3L681.4 557.2L737.6 434.2L718.3 300.3L629.8 198.1L500 160L500 220L597.3 248.6L663.7 325.2L678.2 425.6L636 517.9L550.7 572.7L449.3 572.7L364 517.9L321.8 425.6L336.3 325.2L402.7 248.6L500 220Z" fill="rgb(210,219,238)" fill-opacity="0.2"></path>
-<path d="M500 400M500 340L467.6 349.5L445.4 375.1L440.6 408.5L454.7 439.3L483.1 457.6L516.9 457.6L545.3 439.3L559.4 408.5L554.6 375.1L532.4 349.5L500 340M500 280L435.1 299L390.8 350.2L381.2 417.1L409.3 478.6L466.2 515.1L533.8 515.1L590.7 478.6L618.8 417.1L609.2 350.2L564.9 299L500 280M500 220L402.7 248.6L336.3 325.2L321.8 425.6L364 517.9L449.3 572.7L550.7 572.7L636 517.9L678.2 425.6L663.7 325.2L597.3 248.6L500 220M500 160L370.2 198.1L281.7 300.3L262.4 434.2L318.6 557.2L432.4 630.3L567.6 630.3L681.4 557.2L737.6 434.2L718.3 300.3L629.8 198.1L500 160M500 100L337.8 147.6L227.1 275.4L203.1 442.7L273.3 596.5L415.5 687.8L584.5 687.8L726.7 596.5L796.9 442.7L772.9 275.4L662.2 147.6L500 100" fill="none" stroke="#E0E6F1"></path>
+<path d="M500 340L474 345.9L453.1 362.6L441.5 386.6L441.5 413.4L453.1 437.4L474 454.1L500 460L526 454.1L546.9 437.4L558.5 413.4L558.5 386.6L546.9 362.6L526 345.9L500 340L500 400ZM500 220L421.9 237.8L359.3 287.8L324.5 359.9L324.5 440.1L359.3 512.2L421.9 562.2L500 580L578.1 562.2L640.7 512.2L675.5 440.1L675.5 359.9L640.7 287.8L578.1 237.8L500 220L500 280L552.1 291.9L593.8 325.2L617 373.3L617 426.7L593.8 474.8L552.1 508.1L500 520L447.9 508.1L406.2 474.8L383 426.7L383 373.3L406.2 325.2L447.9 291.9L500 280ZM500 100L369.8 129.7L265.5 213L207.5 333.2L207.5 466.8L265.5 587L369.8 670.3L500 700L630.2 670.3L734.5 587L792.5 466.8L792.5 333.2L734.5 213L630.2 129.7L500 100L500 160L604.1 183.8L687.6 250.4L734 346.6L734 453.4L687.6 549.6L604.1 616.2L500 640L395.9 616.2L312.4 549.6L266 453.4L266 346.6L312.4 250.4L395.9 183.8L500 160Z" fill="rgb(250,250,250)" fill-opacity="0.2"></path>
+<path d="M500 280L447.9 291.9L406.2 325.2L383 373.3L383 426.7L406.2 474.8L447.9 508.1L500 520L552.1 508.1L593.8 474.8L617 426.7L617 373.3L593.8 325.2L552.1 291.9L500 280L500 340L526 345.9L546.9 362.6L558.5 386.6L558.5 413.4L546.9 437.4L526 454.1L500 460L474 454.1L453.1 437.4L441.5 413.4L441.5 386.6L453.1 362.6L474 345.9L500 340ZM500 160L395.9 183.8L312.4 250.4L266 346.6L266 453.4L312.4 549.6L395.9 616.2L500 640L604.1 616.2L687.6 549.6L734 453.4L734 346.6L687.6 250.4L604.1 183.8L500 160L500 220L578.1 237.8L640.7 287.8L675.5 359.9L675.5 440.1L640.7 512.2L578.1 562.2L500 580L421.9 562.2L359.3 512.2L324.5 440.1L324.5 359.9L359.3 287.8L421.9 237.8L500 220Z" fill="rgb(210,219,238)" fill-opacity="0.2"></path>
+<path d="M500 400M500 340L474 345.9L453.1 362.6L441.5 386.6L441.5 413.4L453.1 437.4L474 454.1L500 460L526 454.1L546.9 437.4L558.5 413.4L558.5 386.6L546.9 362.6L526 345.9L500 340M500 280L447.9 291.9L406.2 325.2L383 373.3L383 426.7L406.2 474.8L447.9 508.1L500 520L552.1 508.1L593.8 474.8L617 426.7L617 373.3L593.8 325.2L552.1 291.9L500 280M500 220L421.9 237.8L359.3 287.8L324.5 359.9L324.5 440.1L359.3 512.2L421.9 562.2L500 580L578.1 562.2L640.7 512.2L675.5 440.1L675.5 359.9L640.7 287.8L578.1 237.8L500 220M500 160L395.9 183.8L312.4 250.4L266 346.6L266 453.4L312.4 549.6L395.9 616.2L500 640L604.1 616.2L687.6 549.6L734 453.4L734 346.6L687.6 250.4L604.1 183.8L500 160M500 100L369.8 129.7L265.5 213L207.5 333.2L207.5 466.8L265.5 587L369.8 670.3L500 700L630.2 670.3L734.5 587L792.5 466.8L792.5 333.2L734.5 213L630.2 129.7L500 100" fill="none" stroke="#E0E6F1"></path>
 <path d="M500.5 400L500.5 100" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:sans-serif;" y="-6" transform="translate(500 85)" fill="#bbb">Python</text>
-<path d="M500 400L337.8 147.6" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(329.6981 135.0051)" fill="#bbb">Nix</text>
-<path d="M500 400L227.1 275.4" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(213.4659 269.1443)" fill="#bbb">Text</text>
-<path d="M500 400L203.1 442.7" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(188.2062 444.8292)" fill="#bbb">Markdown</text>
-<path d="M500 400L273.3 596.5" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(261.9389 606.2811)" fill="#bbb">CMake</text>
-<path d="M500 400L415.5 687.8" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(411.2542 702.2403)" fill="#bbb">Shell</text>
-<path d="M500 400L584.5 687.8" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(588.7458 702.2403)" fill="#bbb">INI</text>
-<path d="M500 400L726.7 596.5" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(738.0611 606.2811)" fill="#bbb">HTTP</text>
-<path d="M500 400L796.9 442.7" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(811.7938 444.8292)" fill="#bbb">JSON</text>
-<path d="M500 400L772.9 275.4" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(786.5341 269.1443)" fill="#bbb">C++</text>
-<path d="M500 400L662.2 147.6" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(670.3019 135.0051)" fill="#bbb">YAML</text>
-<polyline points="500 100 486.5 378.9 436.3 370.9 474.9 403.6 500 400 500 400 500 400 500 400 537.3 405.4 500 400 500 400 500 100" fill="none" stroke="#5470c6" stroke-width="2" stroke-linejoin="round"></polyline>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,500,100)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,486.4676,378.9432)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,436.3148,370.9159)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,474.8655,403.6138)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,500,400)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,500,400)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,500,400)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,500,400)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,537.3427,405.3691)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,500,400)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,500,400)" fill="#5470c6"></path>
-<path d="M-5 -5l218.3 0l0 28l-218.3 0Z" transform="translate(5 5)" fill="rgb(0,0,0)" fill-opacity="0" stroke="#ccc" stroke-width="0"></path>
-<text dominant-baseline="central" text-anchor="start" style="font-size:18px;font-family:sans-serif;font-weight:bold;" xml:space="preserve" y="9" transform="translate(5 5)" fill="#464646">Manuel Plank&#39;s tech stack</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:sans-serif;" y="-6" transform="translate(500 85)" fill="#bbb">Nix</text>
+<path d="M500 400L369.8 129.7" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(363.3266 116.1948)" fill="#bbb">SQLPL</text>
+<path d="M500 400L265.5 213" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(253.7231 203.6007)" fill="#bbb">C</text>
+<path d="M500 400L207.5 333.2" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(192.8977 329.9059)" fill="#bbb">C++</text>
+<path d="M500 400L207.5 466.8" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(192.8977 470.0941)" fill="#bbb">Python</text>
+<path d="M500 400L265.5 587" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(253.7231 596.3993)" fill="#bbb">JavaScript</text>
+<path d="M500 400L369.8 670.3" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(363.3266 683.8052)" fill="#bbb">Objective-C</text>
+<path d="M500.5 400L500.5 700" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:sans-serif;" y="6" transform="translate(500 715)" fill="#bbb">Rust</text>
+<path d="M500 400L630.2 670.3" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(636.6734 683.8052)" fill="#bbb">Kotlin</text>
+<path d="M500 400L734.5 587" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(746.2769 596.3993)" fill="#bbb">Makefile</text>
+<path d="M500 400L792.5 466.8" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(807.1023 470.0941)" fill="#bbb">Shell</text>
+<path d="M500 400L792.5 333.2" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(807.1023 329.9059)" fill="#bbb">Elm</text>
+<path d="M500 400L734.5 213" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(746.2769 203.6007)" fill="#bbb">Batchfile</text>
+<path d="M500 400L630.2 129.7" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(636.6734 116.1948)" fill="#bbb">QMake</text>
+<polyline points="500 381.2 479.8 358.1 499.8 399.9 494.8 398.8 207.5 466.8 465.5 427.5 499.1 401.9 500 526.5 512.5 425.9 500.1 400 501.3 400.3 514.1 396.8 500.9 399.3 500.1 399.8 500 381.2" fill="none" stroke="#5470c6" stroke-width="2" stroke-linejoin="round"></polyline>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,500,381.2008)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,479.81,358.075)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,499.8284,399.8631)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,494.7886,398.8105)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,207.5216,466.7563)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,465.5469,427.4754)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,499.0757,401.9194)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,500,526.5203)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,512.4591,425.8716)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,500.0505,400.0403)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,501.3091,400.2988)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,514.0984,396.7821)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,500.8984,399.2835)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,500.1176,399.7557)" fill="#5470c6"></path>
 </svg>

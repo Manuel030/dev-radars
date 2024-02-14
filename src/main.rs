@@ -1,10 +1,6 @@
 use {
     anyhow::{anyhow, Result},
-    charming::{
-        component::{RadarCoordinate, Title},
-        series::Radar,
-        Chart, ImageRenderer,
-    },
+    charming::{component::RadarCoordinate, series::Radar, Chart, ImageRenderer},
     clap::Parser,
     lazy_static::lazy_static,
     serde::Deserialize,
@@ -14,10 +10,23 @@ use {
 
 fn visit_dirs(
     dir: &Path,
-    username: &str,
-    accumulator: Option<HashMap<String, usize>>,
-) -> Result<Option<HashMap<String, usize>>> {
+    usernames: &Vec<&str>,
+    accumulator: Option<HashMap<String, i64>>,
+    max_depth: Option<u8>,
+    mut current_depth: Option<u8>,
+) -> Result<Option<HashMap<String, i64>>> {
     if dir.is_dir() {
+        current_depth =
+            if let (Some(max_depth), Some(mut current_depth)) = (max_depth, current_depth) {
+                if current_depth > max_depth {
+                    return Ok(None);
+                } else {
+                    current_depth += 1
+                }
+                Some(current_depth)
+            } else {
+                current_depth
+            };
         let mut inner_accumulator = None;
         for entry in read_dir(dir)? {
             let entry = entry?;
@@ -31,10 +40,11 @@ fn visit_dirs(
                     == ".git"
                 {
                     let res =
-                        parse_repo(path.parent().ok_or(anyhow!("no parent folder"))?, username)?;
+                        parse_repo(path.parent().ok_or(anyhow!("no parent folder"))?, usernames)?;
                     inner_accumulator = combine_loc_by_lang(Some(res), inner_accumulator)
                 } else {
-                    inner_accumulator = visit_dirs(&path, username, inner_accumulator.clone())?;
+                    let res = visit_dirs(&path, usernames, None, max_depth, current_depth)?;
+                    inner_accumulator = combine_loc_by_lang(inner_accumulator, res);
                 }
             };
         }
@@ -45,9 +55,9 @@ fn visit_dirs(
 }
 
 fn combine_loc_by_lang(
-    accumulator: Option<HashMap<String, usize>>,
-    other_accumulator: Option<HashMap<String, usize>>,
-) -> Option<HashMap<String, usize>> {
+    accumulator: Option<HashMap<String, i64>>,
+    other_accumulator: Option<HashMap<String, i64>>,
+) -> Option<HashMap<String, i64>> {
     match (accumulator, other_accumulator) {
         (Some(mut loc_by_lang), Some(loc_by_lang_inner)) => {
             for (lang, loc) in loc_by_lang_inner.iter() {
@@ -64,7 +74,7 @@ fn combine_loc_by_lang(
     }
 }
 
-fn parse_repo(dir: &Path, username: &str) -> Result<HashMap<String, usize>> {
+fn parse_repo(dir: &Path, usernames: &Vec<&str>) -> Result<HashMap<String, i64>> {
     println!("Parsing {:?}", dir.as_os_str());
     let ls_files_output = if cfg!(target_os = "windows") {
         Command::new("cmd")
@@ -90,14 +100,15 @@ fn parse_repo(dir: &Path, username: &str) -> Result<HashMap<String, usize>> {
 
     let loc_by_lang = splitted.iter().try_fold(
         HashMap::new(),
-        |mut acc, path| -> Result<HashMap<String, usize>> {
+        |mut acc: HashMap<String, i64>, path| -> Result<HashMap<String, i64>> {
             let blame_output = if cfg!(target_os = "windows") {
                 Command::new("cmd")
                     .args([
                         "/C",
                         &format!(
-                            "cd {} && git blame --line-porcelain {path}",
-                            dir.to_str().unwrap()
+                            "cd {} && git blame --line-porcelain {}",
+                            dir.to_str().unwrap(),
+                            path
                         ),
                     ])
                     .output()
@@ -106,8 +117,9 @@ fn parse_repo(dir: &Path, username: &str) -> Result<HashMap<String, usize>> {
                 Command::new("sh")
                     .arg("-c")
                     .arg(format!(
-                        "cd {} && git blame --line-porcelain {path}",
-                        dir.to_str().unwrap()
+                        "cd {} && git blame --line-porcelain {}",
+                        dir.to_str().unwrap(),
+                        path
                     ))
                     .output()
                     .expect("failed to execute process")
@@ -115,7 +127,14 @@ fn parse_repo(dir: &Path, username: &str) -> Result<HashMap<String, usize>> {
             let Ok(blame) = String::from_utf8(blame_output.stdout) else {
                 return Ok(acc);
             };
-            let count = blame.matches(&format!("author {username}")).count();
+
+            let count: i64 = usernames
+                .iter()
+                .map(|name| {
+                    let c = blame.matches(&format!("author {name}")).count();
+                    c as i64
+                })
+                .sum();
 
             if let Some(extension) = Path::new(path).extension() {
                 let extension_with_dot = String::from(".")
@@ -124,9 +143,11 @@ fn parse_repo(dir: &Path, username: &str) -> Result<HashMap<String, usize>> {
                         .ok_or(anyhow!("found None in Os string"))?;
 
                 if let Some(lang) = LANGUAGES.get(&extension_with_dot) {
-                    acc.entry(lang.name.clone())
-                        .and_modify(|lang_count| *lang_count += count)
-                        .or_insert(count);
+                    if matches!(lang.r#type, LanguageType::Programming) && count > 0 {
+                        acc.entry(lang.name.clone())
+                            .and_modify(|lang_count| *lang_count += count)
+                            .or_insert(count);
+                    }
                 }
                 Ok(acc)
             } else {
@@ -139,19 +160,18 @@ fn parse_repo(dir: &Path, username: &str) -> Result<HashMap<String, usize>> {
     Ok(loc_by_lang)
 }
 
-fn chart(data: &HashMap<String, usize>, username: &str) -> Result<Chart> {
+fn chart(data: &HashMap<String, i64>) -> Result<Chart> {
     let max_loc = data
         .values()
         .max()
         .ok_or(anyhow!("no data to render"))?
-        .to_owned() as i64;
+        .to_owned();
     let radar_triplets: Vec<(&str, i64, i64)> = data
         .iter()
         .map(|(lang, _)| (lang.as_str(), 0, max_loc))
         .collect();
     let locs: Vec<i64> = data.iter().map(|(_, loc)| loc.to_owned() as i64).collect();
     Ok(Chart::new()
-        .title(Title::new().text(format!("{username}'s tech stack")))
         .radar(RadarCoordinate::new().indicator(radar_triplets))
         .series(Radar::new().name("LOC").data(vec![(locs, "Foo")])))
 }
@@ -159,8 +179,17 @@ fn chart(data: &HashMap<String, usize>, username: &str) -> Result<Chart> {
 #[derive(Deserialize, Debug, Clone)]
 struct Language {
     name: String,
-    r#type: String,
+    r#type: LanguageType,
     extensions: Vec<String>,
+}
+
+#[derive(Deserialize, Debug, Clone)]
+#[serde(rename_all = "snake_case")]
+enum LanguageType {
+    Programming,
+    Data,
+    Prose,
+    Markup,
 }
 
 lazy_static! {
@@ -192,9 +221,9 @@ struct Args {
     #[arg(short, long)]
     depth: Option<u8>,
 
-    // Git username. If none provided, the global git username will be used
-    #[arg(short, long)]
-    author: Option<String>,
+    // Git username(s). If none provided, the global git username will be used
+    #[arg(short, long, value_delimiter = ' ',  num_args = 1..)]
+    author: Option<Vec<String>>,
 }
 
 fn main() -> Result<()> {
@@ -218,16 +247,18 @@ fn main() -> Result<()> {
                 .expect("failed to execute process")
         };
         let username = String::from_utf8(username_output.stdout).unwrap();
-        username.trim().to_owned()
+        vec![username.trim().to_owned()]
     });
 
-    let res = visit_dirs(path.as_path(), &username, None)?;
+    let username_str = username.iter().map(|name| name.as_str()).collect();
+
+    let res = visit_dirs(path.as_path(), &username_str, None, args.depth, Some(1))?;
     println!("{:?}", res);
 
     if let Some(data) = res {
-        let radar = chart(&data, &username)?;
+        let radar = chart(&data)?;
         let mut renderer = ImageRenderer::new(1000, 800);
-        renderer.save(&radar, "radar.svg");
+        let _ = renderer.save(&radar, "radar.svg");
     }
     Ok(())
 }

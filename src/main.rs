@@ -98,7 +98,6 @@ fn parse_repo(dir: &Path, usernames: &Vec<&str>) -> Result<HashMap<String, i64>>
     let mut splitted: Vec<&str> = git_files.split("\n").collect();
     // the last element is always an empty line
     splitted.pop();
-    // println!("{:?}", splitted);
 
     let loc_by_lang = splitted.iter().try_fold(
         HashMap::new(),
@@ -157,8 +156,6 @@ fn parse_repo(dir: &Path, usernames: &Vec<&str>) -> Result<HashMap<String, i64>>
             }
         },
     )?;
-    println!("We have {:?} loc in {}", loc_by_lang, dir.display());
-
     Ok(loc_by_lang)
 }
 

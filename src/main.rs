@@ -5,6 +5,7 @@ use {
     },
     clap::Parser,
     lazy_static::lazy_static,
+    prettytable::{row, Table},
     serde::Deserialize,
     std::{collections::HashMap, fmt::Debug, fs::read_dir, path::Path, process::Command},
 };
@@ -161,7 +162,7 @@ fn parse_repo(dir: &Path, usernames: &Vec<&str>) -> Result<HashMap<String, i64>>
     Ok(loc_by_lang)
 }
 
-fn chart(data: &HashMap<String, i64>, top_n: u8) -> Result<Chart> {
+fn chart(data: &HashMap<String, i64>, top_n: u8) -> Result<(Table, Chart)> {
     let max_loc = data
         .values()
         .max()
@@ -176,6 +177,12 @@ fn chart(data: &HashMap<String, i64>, top_n: u8) -> Result<Chart> {
     sorted_by_loc.reverse();
     sorted_by_loc.truncate(top_n as usize);
 
+    let mut table = Table::new();
+    table.add_row(row!["Language", "LOC"]);
+    for (lang, loc) in &sorted_by_loc {
+        table.add_row(row!(lang, loc));
+    }
+
     let radar_triplets: Vec<(&str, i64, i64)> = sorted_by_loc
         .iter()
         .map(|(lang, _)| (*lang, 0, max_loc))
@@ -183,14 +190,15 @@ fn chart(data: &HashMap<String, i64>, top_n: u8) -> Result<Chart> {
 
     let locs: Vec<i64> = sorted_by_loc.iter().map(|(_, loc)| *loc).collect();
 
-    Ok(Chart::new()
+    let plot = Chart::new()
         .radar(RadarCoordinate::new().indicator(radar_triplets))
         .series(
             Radar::new()
                 .name("LOC")
                 .data(vec![(locs, "LOC")])
                 .area_style(AreaStyle::new()),
-        ))
+        );
+    Ok((table, plot))
 }
 
 #[derive(Deserialize, Debug, Clone)]
@@ -273,12 +281,14 @@ fn main() -> Result<()> {
     let username_str = username.iter().map(|name| name.as_str()).collect();
 
     let res = visit_dirs(path.as_path(), &username_str, None, args.depth, Some(1))?;
-    println!("{:?}", res);
 
     if let Some(data) = res {
-        let radar = chart(&data, args.top_n)?;
+        let (table, radar) = chart(&data, args.top_n)?;
+        table.printstd();
         let mut renderer = ImageRenderer::new(1000, 800);
         let _ = renderer.save(&radar, "radar.svg");
+    } else {
+        println!("No source files found.");
     }
     Ok(())
 }

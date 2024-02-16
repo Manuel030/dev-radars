@@ -1,11 +1,12 @@
 use {
     anyhow::{anyhow, Result},
-    charming::{component::RadarCoordinate, series::Radar, Chart, ImageRenderer},
+    charming::{
+        component::RadarCoordinate, element::AreaStyle, series::Radar, Chart, ImageRenderer,
+    },
     clap::Parser,
     lazy_static::lazy_static,
     serde::Deserialize,
-    std::collections::HashMap,
-    std::{fmt::Debug, fs::read_dir, path::Path, process::Command},
+    std::{collections::HashMap, fmt::Debug, fs::read_dir, path::Path, process::Command},
 };
 
 fn visit_dirs(
@@ -160,20 +161,36 @@ fn parse_repo(dir: &Path, usernames: &Vec<&str>) -> Result<HashMap<String, i64>>
     Ok(loc_by_lang)
 }
 
-fn chart(data: &HashMap<String, i64>) -> Result<Chart> {
+fn chart(data: &HashMap<String, i64>, top_n: u8) -> Result<Chart> {
     let max_loc = data
         .values()
         .max()
         .ok_or(anyhow!("no data to render"))?
         .to_owned();
-    let radar_triplets: Vec<(&str, i64, i64)> = data
+
+    let mut sorted_by_loc: Vec<(&str, i64)> = data
         .iter()
-        .map(|(lang, _)| (lang.as_str(), 0, max_loc))
+        .map(|(lang, loc)| (lang.as_str(), *loc))
         .collect();
-    let locs: Vec<i64> = data.iter().map(|(_, loc)| loc.to_owned() as i64).collect();
+    sorted_by_loc.sort_unstable_by_key(|(_, loc)| *loc);
+    sorted_by_loc.reverse();
+    sorted_by_loc.truncate(top_n as usize);
+
+    let radar_triplets: Vec<(&str, i64, i64)> = sorted_by_loc
+        .iter()
+        .map(|(lang, _)| (*lang, 0, max_loc))
+        .collect();
+
+    let locs: Vec<i64> = sorted_by_loc.iter().map(|(_, loc)| *loc).collect();
+
     Ok(Chart::new()
         .radar(RadarCoordinate::new().indicator(radar_triplets))
-        .series(Radar::new().name("LOC").data(vec![(locs, "Foo")])))
+        .series(
+            Radar::new()
+                .name("LOC")
+                .data(vec![(locs, "LOC")])
+                .area_style(AreaStyle::new()),
+        ))
 }
 
 #[derive(Deserialize, Debug, Clone)]
@@ -216,14 +233,17 @@ struct Args {
     #[arg(short, long)]
     path: Option<String>,
 
-    // TODO: add functionality
-    /// Depth  of child directories to traverse
+    /// Depth of child directories to traverse
     #[arg(short, long)]
     depth: Option<u8>,
 
     // Git username(s). If none provided, the global git username will be used
     #[arg(short, long, value_delimiter = ' ',  num_args = 1..)]
     author: Option<Vec<String>>,
+
+    // Top N languages to plot
+    #[arg(short, long, default_value_t = 10)]
+    top_n: u8,
 }
 
 fn main() -> Result<()> {
@@ -256,7 +276,7 @@ fn main() -> Result<()> {
     println!("{:?}", res);
 
     if let Some(data) = res {
-        let radar = chart(&data)?;
+        let radar = chart(&data, args.top_n)?;
         let mut renderer = ImageRenderer::new(1000, 800);
         let _ = renderer.save(&radar, "radar.svg");
     }

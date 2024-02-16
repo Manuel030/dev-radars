@@ -39,7 +39,7 @@ dev-radars -p /home/manuel/projects -d 2
 When collecting the LOC, search for both author names `foo` and `bar`
 
 ```
-dev-radars -p /home/manuel/projects  -a "foo" "bar"
+dev-radars -p /home/manuel/projects -a "foo" "bar"
 ```
 
 ## Todos

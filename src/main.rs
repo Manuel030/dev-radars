@@ -218,7 +218,7 @@ lazy_static! {
     // File extension is the key
     static ref LANGUAGES: HashMap<String, Language> = {
         let languages_asset = include_str!(
-            "../43962d06686722d26d176fad46879d41/Programming_Languages_Extensions.json"
+            "../8d04436c90fbc93758ceccdcfc4bbe86/Programming_Languages_Extensions.json"
         );
         let languages_vec: Vec<Language> = serde_json::from_str(languages_asset).unwrap();
         let mut languages_map = HashMap::new();

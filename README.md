@@ -14,7 +14,7 @@ git ls-files | xargs -n1 git blame --line-porcelain | sed -n 's/^author //p' | s
 Using cargo:
 
 ```
-git clone git@github.com:Manuel030/dev-radars.git
+git clone --recursive git@github.com:Manuel030/dev-radars.git
 cargo install --path dev-radars
 ```
 

@@ -17,7 +17,7 @@ categories = ["command-line-utilities"]
 anyhow = "1.0.79"
 charming = { version = "0.3.1", features = ["ssr"] }
 clap = { version = "4.5.0", features = ["derive"] }
-indicatif = "0.17.8"
+# indicatif = "0.17.8"
 lazy_static = "1.4.0"
 prettytable-rs = "0.10.0"
 serde = { version = "1.0.196", features = ["derive"] }

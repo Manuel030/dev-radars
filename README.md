@@ -1,7 +1,9 @@
 # dev-radars
 Render a radar plot of your tech stack and print LOC statistics. `dev-radars` parses git objects to compute statistics per technology.
 
-<img src="radar.svg" height="500" width="500" >
+<p align="center">
+  <img src="radar.svg" height="700" width="700" >
+</p>
 
 `dev-radars` is something between running [Aloc](https://github.com/AlDanial/cloc/tree/master) in a Docker container and executing random commands from the internet:
 

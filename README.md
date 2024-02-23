@@ -5,6 +5,27 @@ Render a radar plot of your tech stack and print LOC statistics. `dev-radars` pa
   <img src="radar.svg" height="700" width="700" >
 </p>
 
+```
++-----------+------+
+| Language  | LOC  |
++-----------+------+
+| Rust      | 3637 |
++-----------+------+
+| Python    | 2615 |
++-----------+------+
+| SQLPL     | 1802 |
++-----------+------+
+| Kotlin    | 1531 |
++-----------+------+
+| Elm       | 560  |
++-----------+------+
+| Nix       | 382  |
++-----------+------+
+| Batchfile | 89   |
++-----------+------+
+| Java      | 66    
+```
+
 `dev-radars` is something between running [Aloc](https://github.com/AlDanial/cloc/tree/master) in a Docker container and executing random commands from the internet:
 
 ```
@@ -24,7 +45,7 @@ cargo install dev-radars
 Usage: dev-radars [OPTIONS]
 
 Options:
-  -p, --path <PATH>         Which path to search
+  -p, --path <PATH>         Which path(s) to search
   -d, --depth <DEPTH>       Depth of child directories to traverse
   -a, --author <AUTHOR>...  
   -t, --top-n <TOP_N>       [default: 10]
@@ -43,13 +64,12 @@ dev-radars -p /home/manuel/projects -d 2
 When collecting the LOC, search for both author names `foo` and `bar`
 
 ```
-dev-radars -p /home/manuel/projects -a "foo" "bar"
+dev-radars -p /home/manuel/projects -a "foo" -a "bar"
 ```
 
 ## Todos
-- [ ] Flag to add an ignore list of directory names
 - [ ] Parallel processing
 - [ ] Installation with Nix
-- [X] Support multiple user names (local and global)
+- [X] Support multiple git user names (local and global)
 - [ ] Add progress bar
 

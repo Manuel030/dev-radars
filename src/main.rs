@@ -234,16 +234,16 @@ lazy_static! {
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
-    /// Which path to search
-    #[arg(short, long)]
-    path: Option<String>,
+    /// Which path(s) to search
+    #[arg(short, long, num_args = 1..)]
+    path: Option<Vec<String>>,
 
     /// Depth of child directories to traverse
     #[arg(short, long)]
     depth: Option<u8>,
 
     // Git username(s). If none provided, the global git username will be used
-    #[arg(short, long, value_delimiter = ' ',  num_args = 1..)]
+    #[arg(short, long,  num_args = 1..)]
     author: Option<Vec<String>>,
 
     // Top N languages to plot
@@ -253,10 +253,13 @@ struct Args {
 
 fn main() -> Result<()> {
     let args = Args::parse();
-    let path = if let Some(path) = &args.path {
-        Path::new(path).to_owned()
+    let paths = if let Some(paths) = &args.path {
+        paths
+            .iter()
+            .map(|path| Path::new(path).to_owned())
+            .collect()
     } else {
-        std::env::current_dir()?
+        vec![std::env::current_dir()?]
     };
     let username = args.author.unwrap_or_else(|| {
         let username_output = if cfg!(target_os = "windows") {
@@ -277,9 +280,15 @@ fn main() -> Result<()> {
 
     let username_str = username.iter().map(|name| name.as_str()).collect();
 
-    let res = visit_dirs(path.as_path(), &username_str, None, args.depth, Some(1))?;
+    let results = paths
+        .iter()
+        .map(|path| visit_dirs(path.as_path(), &username_str, None, args.depth, Some(1)))
+        .collect::<Result<Vec<_>, _>>()?;
+    let combined_results = results
+        .iter()
+        .fold(None, |acc, e| combine_loc_by_lang(acc, e.clone()));
 
-    if let Some(data) = res {
+    if let Some(data) = combined_results {
         let (table, radar) = chart(&data, args.top_n)?;
         table.printstd();
         let mut renderer = ImageRenderer::new(1000, 800);

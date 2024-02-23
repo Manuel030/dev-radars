@@ -1,29 +1,32 @@
 <svg width="1000" height="800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 1000 800">
 <rect width="1000" height="800" x="0" y="0" id="0" fill="none"></rect>
-<path d="M500 340L453.1 362.6L441.5 413.4L474 454.1L526 454.1L558.5 413.4L546.9 362.6L500 340L500 400ZM500 220L359.3 287.8L324.5 440.1L421.9 562.2L578.1 562.2L675.5 440.1L640.7 287.8L500 220L500 280L593.8 325.2L617 426.7L552.1 508.1L447.9 508.1L383 426.7L406.2 325.2L500 280ZM500 100L265.5 213L207.5 466.8L369.8 670.3L630.2 670.3L792.5 466.8L734.5 213L500 100L500 160L687.6 250.4L734 453.4L604.1 616.2L395.9 616.2L266 453.4L312.4 250.4L500 160Z" fill="rgb(250,250,250)" fill-opacity="0.2"></path>
-<path d="M500 280L406.2 325.2L383 426.7L447.9 508.1L552.1 508.1L617 426.7L593.8 325.2L500 280L500 340L546.9 362.6L558.5 413.4L526 454.1L474 454.1L441.5 413.4L453.1 362.6L500 340ZM500 160L312.4 250.4L266 453.4L395.9 616.2L604.1 616.2L734 453.4L687.6 250.4L500 160L500 220L640.7 287.8L675.5 440.1L578.1 562.2L421.9 562.2L324.5 440.1L359.3 287.8L500 220Z" fill="rgb(210,219,238)" fill-opacity="0.2"></path>
-<path d="M500 400M500 340L453.1 362.6L441.5 413.4L474 454.1L526 454.1L558.5 413.4L546.9 362.6L500 340M500 280L406.2 325.2L383 426.7L447.9 508.1L552.1 508.1L617 426.7L593.8 325.2L500 280M500 220L359.3 287.8L324.5 440.1L421.9 562.2L578.1 562.2L675.5 440.1L640.7 287.8L500 220M500 160L312.4 250.4L266 453.4L395.9 616.2L604.1 616.2L734 453.4L687.6 250.4L500 160M500 100L265.5 213L207.5 466.8L369.8 670.3L630.2 670.3L792.5 466.8L734.5 213L500 100" fill="none" stroke="#E0E6F1"></path>
+<path d="M500 340L457.6 357.6L440 400L457.6 442.4L500 460L542.4 442.4L560 400L542.4 357.6L500 340L500 400ZM500 220L372.7 272.7L320 400L372.7 527.3L500 580L627.3 527.3L680 400L627.3 272.7L500 220L500 280L584.9 315.1L620 400L584.9 484.9L500 520L415.1 484.9L380 400L415.1 315.1L500 280ZM500 100L287.9 187.9L200 400L287.9 612.1L500 700L712.1 612.1L800 400L712.1 187.9L500 100L500 160L669.7 230.3L740 400L669.7 569.7L500 640L330.3 569.7L260 400L330.3 230.3L500 160Z" fill="rgb(250,250,250)" fill-opacity="0.2"></path>
+<path d="M500 280L415.1 315.1L380 400L415.1 484.9L500 520L584.9 484.9L620 400L584.9 315.1L500 280L500 340L542.4 357.6L560 400L542.4 442.4L500 460L457.6 442.4L440 400L457.6 357.6L500 340ZM500 160L330.3 230.3L260 400L330.3 569.7L500 640L669.7 569.7L740 400L669.7 230.3L500 160L500 220L627.3 272.7L680 400L627.3 527.3L500 580L372.7 527.3L320 400L372.7 272.7L500 220Z" fill="rgb(210,219,238)" fill-opacity="0.2"></path>
+<path d="M500 400M500 340L457.6 357.6L440 400L457.6 442.4L500 460L542.4 442.4L560 400L542.4 357.6L500 340M500 280L415.1 315.1L380 400L415.1 484.9L500 520L584.9 484.9L620 400L584.9 315.1L500 280M500 220L372.7 272.7L320 400L372.7 527.3L500 580L627.3 527.3L680 400L627.3 272.7L500 220M500 160L330.3 230.3L260 400L330.3 569.7L500 640L669.7 569.7L740 400L669.7 230.3L500 160M500 100L287.9 187.9L200 400L287.9 612.1L500 700L712.1 612.1L800 400L712.1 187.9L500 100" fill="none" stroke="#E0E6F1"></path>
 <path d="M500.5 400L500.5 100" fill="none" stroke="#bbb" stroke-linecap="round"></path>
 <text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:sans-serif;" y="-6" transform="translate(500 85)" fill="#bbb">Rust</text>
-<path d="M500 400L265.5 213" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(253.7231 203.6007)" fill="#bbb">Python</text>
-<path d="M500 400L207.5 466.8" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(192.8977 470.0941)" fill="#bbb">SQLPL</text>
-<path d="M500 400L369.8 670.3" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(363.3266 683.8052)" fill="#bbb">Kotlin</text>
-<path d="M500 400L630.2 670.3" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(636.6734 683.8052)" fill="#bbb">Elm</text>
-<path d="M500 400L792.5 466.8" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(807.1023 470.0941)" fill="#bbb">Nix</text>
-<path d="M500 400L734.5 213" fill="none" stroke="#bbb" stroke-linecap="round"></path>
-<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(746.2769 203.6007)" fill="#bbb">Shell</text>
-<polyline points="500 100 329.5 264 347.7 434.8 461.7 479.6 521.1 443.7 523.5 405.4 503.5 397.2 500 100" fill="none" stroke="#5470c6" stroke-width="2" stroke-linejoin="round"></polyline>
-<polygon points="500 100 329.5 264 347.7 434.8 461.7 479.6 521.1 443.7 523.5 405.4 503.5 397.2 500 100" fill="#5470c6" fill-opacity="0.7"></polygon>
+<path d="M500 400L287.9 187.9" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(277.2614 177.2614)" fill="#bbb">Python</text>
+<path d="M500 400.5L200 400.5" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(185 400)" fill="#bbb">SQLPL</text>
+<path d="M500 400L287.9 612.1" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:12px;font-family:sans-serif;" transform="translate(277.2614 622.7386)" fill="#bbb">Kotlin</text>
+<path d="M500.5 400L500.5 700" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:sans-serif;" y="6" transform="translate(500 715)" fill="#bbb">Elm</text>
+<path d="M500 400L712.1 612.1" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(722.7386 622.7386)" fill="#bbb">Nix</text>
+<path d="M500 400.5L800 400.5" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(815 400)" fill="#bbb">Batchfile</text>
+<path d="M500 400L712.1 187.9" fill="none" stroke="#bbb" stroke-linecap="round"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:12px;font-family:sans-serif;" transform="translate(722.7386 177.2614)" fill="#bbb">Java</text>
+<polyline points="500 100 347.5 247.5 351.4 400 410.7 489.3 500 446.2 522.3 422.3 507.3 400 503.8 396.2 500 100" fill="none" stroke="#5470c6" stroke-width="2" stroke-linejoin="round"></polyline>
+<polygon points="500 100 347.5 247.5 351.4 400 410.7 489.3 500 446.2 522.3 422.3 507.3 400 503.8 396.2 500 100" fill="#5470c6" fill-opacity="0.7"></polygon>
 <path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,500,100)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,329.511,264.0396)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,347.6746,434.7673)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,461.6652,479.6029)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,521.0672,443.7465)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,523.4997,405.3637)" fill="#5470c6"></path>
-<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,503.525,397.1889)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,347.4772,247.4772)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,351.361,400)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,410.7027,489.2973)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,500,446.1919)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,522.2806,422.2806)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,507.3412,400)" fill="#5470c6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,503.8495,396.1505)" fill="#5470c6"></path>
 </svg>
